@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask import render_template
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:password@localhost/flask_movie'
@@ -17,6 +18,15 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+#now posting data to my site
+
+@app.route('/')
+def index():
+    return  render_template('add_user.html')
+@app.route('/post_user', methods=['POST'])
+def post_user():
+    return ("Welcome to my homepage ")
 
 if __name__ =="__main__":
     app.run()
